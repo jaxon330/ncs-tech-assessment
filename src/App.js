@@ -1,38 +1,63 @@
-import React, {useState} from 'react';
+import React, {useState, createContext} from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import { Axios } from 'axios';
+import google from 'googlethis';
 import Search from './components/Search';
 import VehicleDetails from './components/VehicleDetails';
+import SearchResult from './components/SearchResult';
+import ReactSwitch from 'react-switch';
+
+export const ThemeContext = createContext(null)
 
 
+// const searchImages = async () => {
+//   let images = await google.image('The Wolf Among Us', { safe: false }, { mode: "cors"});
+//   console.log(images); 
+// }
+// searchImages()
 
 function App() {
-
-  const [vinNumber, setVinNumber] = useState("")
   const [vehicleInfo, setVehicleInfo] = useState(null)
+  const [theme, setTheme] = useState('light')
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
+  }
 
+  const backToSearch = () => {
+    navigate('/');
+    setVehicleInfo(null)
+}
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await Axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vinNumber}?format=json`);
-    
-      console.log(response)
-      setVehicleInfo(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
- 
-  // JDTKB20U277600828
+  // JTDKB20U277600828
   return (
-    <Routes>
-      <Route path='/' element={<Search setVinNumber={setVinNumber} handleClick={handleSubmit} />} />
-      <Route path='details' element={<VehicleDetails vehicleInfo={vehicleInfo} />} />
-    </Routes>
+
+    <ThemeContext.Provider value={{theme, toggleTheme }}>
+    <div className='app' id={theme} >
+      <div className='navBar'>
+        {vehicleInfo !== null ? (
+          <div className='backToSearch'>
+            <button className='backToSearchButton' onClick={backToSearch}>Back to Search</button>
+          </div>
+        ): null}
+
+        <div className='switch'>
+          <label>{theme === 'light' ? 'Light Mode' : 'Dark Mode'}</label>
+          <ReactSwitch onChange={toggleTheme} checked={theme === 'dark'} />
+        </div>
+      </div>
+      <Routes>
+        <Route path='/' element={<Search vehicleInfo={vehicleInfo} setVehicleInfo={setVehicleInfo} />} />
+        <Route path='details' element={ <VehicleDetails vehicleInfo={vehicleInfo} setVehicleInfo={setVehicleInfo} />} />
+        <Route path='test' element={ <SearchResult vehicleInfo={vehicleInfo} setVehicleInfo={setVehicleInfo} />} />
+      </Routes>
+        
+    </div>
+</ThemeContext.Provider>
+
+    
   );
 }
 

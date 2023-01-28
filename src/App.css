@@ -1,38 +1,127 @@
-/* .App {
+body {
+  /* font-family: Arial, sans-serif;
+  background-size: cover;
+  background-position: center;
+  text-align: center; */
+  margin: 0;
+  padding: 0;
+}
+
+/* Search component */
+
+.app {
+  font-family: "Ubuntu", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+
+}
+
+.searchTitle {
+  margin: 0;
+  padding-top: 50px;
+  color: #4CAF50;
+}
+
+
+.searchLabel {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #4CAF50;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+#dark {
+  background-color: #444;
+  color: aliceblue;
+}
+
+
+/* VehicleDetails component */
+
+.container {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.vehicleDetails {
+  margin-top: 50px;
+  margin: auto;
+  text-align: left;
+  font-size: 1.2em;
+  max-width: 950px;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.vehicleDetails > p {
+  margin-bottom: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.vin-error {
+  font-size: 15px;
+  color: #DC0015;
+  font-weight: bold;
+  margin-top: 5px;
+  
+}
+
+.navBar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+
+}
+
+.switch {
+  display: flex;
+  justify-content: right;
+  margin-right: 20px;
+}
+
+.switch label {
+  margin: 10px;
+  font-weight: bold;
+}
+
+#light .switch label {
+  color: #4CAF50;
+}
+
+#dark .switch label {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.backToSearch {
+  display: flex;
+  justify-content: left;
+  margin-left: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.backToSearchButton {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
